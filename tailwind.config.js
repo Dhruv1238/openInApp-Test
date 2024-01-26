@@ -11,6 +11,7 @@ export default {
       },
       fontFamily: {
         'sans': ['Montserrat', 'sans-serif'],
+        'lato': ['Lato', 'sans-serif'],
       }
     },
   },

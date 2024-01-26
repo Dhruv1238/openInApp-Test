@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom"
-import { SignUp } from "./pages/SignUp"
+import { SignIn } from "./pages/SignIn"
 import { NotFound } from "./pages/NotFound"
 
 
 export const Router = () => {
-    return(
+    return (
         <>
             <Routes>
-                <Route path="/" element={<SignUp />} />
+                <Route path="/" element={<SignIn />} />
                 {/* <Route path="/about" element={<About />} /> */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
