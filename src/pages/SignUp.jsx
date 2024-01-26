@@ -32,12 +32,12 @@ export const SignUp = () => {
                 <div className={`hidden lg:flex lg:flex-col justify-between items-center overflow-hidden min-h-screen max-h-screen text-center ${width} text-gray-900`}>
                     <img src={logo} alt="logo" className='z-50 ml-10 mt-10 self-start' />
                     <img src={base} alt="base" className='fixed left-0 z-0 overflow-hidden' />
-                    <h1 className="text-6xl text-center font-bold text-white z-50 w-fit">BASE</h1>
+                    <h1 className="text-6xl text-center font-bold text-white z-50 mb-10">BASE</h1>
                     <div className='flex gap-5 mb-10 mr-20'>
-                        <img src={github} alt="socials" className='z-50 h-10 cursor-pointer' />
-                        <img src={twitter} alt="socials" className='z-50 h-10 cursor-pointer' />
-                        <img src={linkedin} alt="socials" className='z-50 h-10 cursor-pointer' />
-                        <img src={discord} alt="socials" className='z-50 h-10 cursor-pointer' />
+                        <img src={github} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
+                        <img src={twitter} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
+                        <img src={linkedin} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
+                        <img src={discord} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
                     </div>
                 </div>
                 <div className="flex flex-col items-center w-1/2 justify-center min-h-screen text-center bg-white text-gray-900">

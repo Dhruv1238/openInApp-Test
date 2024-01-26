@@ -6,8 +6,11 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{
-        baseBlue:'#605BFF',
+      colors: {
+        baseBlue: '#605BFF',
+      },
+      fontFamily: {
+        'sans': ['Montserrat', 'sans-serif'],
       }
     },
   },
