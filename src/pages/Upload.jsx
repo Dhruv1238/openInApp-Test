@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom"
 import { Drawer } from "../components/Drawer"
+import ExcelUpload from "../components/ExcelUpload"
 
 export const Upload = () => {
     return (
         <>
-            <div className="flex h-screen w-screen items-center justify-center">
+            <div className="flex min-h-screen w-screen items-start justify-center overflow-scroll">
                 <Drawer />
-                <Link to='/' className="z-40 text-center items-center fixed">
-                    <h1 >Upload</h1>
-                </Link>
+                <div className="z-40 fixed mt-28 md:ml-24 overflow-auto">
+                    {/* <h1 >Upload</h1> */}
+                    <ExcelUpload />
+                </div>
             </div>
         </>
     )

@@ -34,7 +34,7 @@ export const Drawer = () => {
 
     return (
         <>
-            <div className={`h-screen ${bright} ${index}`}>
+            <div className={`min-h-screen ${bright} ${index}`}>
                 <div className='flex flex-row justify-between p-5 gap-5 h-20 w-screen'>
                     <div className='flex flex-row gap-4 items-center md:ml-10'>
                         <img src={burger} alt="navbar" className='h-4 md:hidden z-50' onClick={toggleDrawer} />
