@@ -10,6 +10,7 @@ export default {
         sans: ["Montserrat", "sans-serif"],
         lato: ["Lato", "sans-serif"],
         nunito: ["Nunito", "sans-serif"],
+        figtree: ["Figtree", "sans-serif"],
       },
     },
   },
