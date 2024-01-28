@@ -21,19 +21,21 @@ const ExcelUpload = () => {
         accept: acceptedFileTypes,
         multiple: false,
         onDrop: acceptedFiles => {
-            setFileName(acceptedFiles[0].name);
             if (acceptedFiles[0].name.endsWith('.csv')) {
                 setFile(acceptedFiles[0]);
-            } else {
+                setFileName(acceptedFiles[0].name);
+            } else if (acceptedFiles[0].name.endsWith('.xlsx') || acceptedFiles[0].name.endsWith('.xls')) {
+                setFileName(acceptedFiles[0].name);
                 parseExcelFile(acceptedFiles[0]).then((data) => {
                     console.log(data);
                     setExcelData(data);
                 });
             }
+            else {
+                alert('Please upload a valid file');
+            }
         }
     });
-
-    console.log(acceptedFiles);
 
     const removeFile = () => {
         setFileName(null);
@@ -53,14 +55,6 @@ const ExcelUpload = () => {
         }
         removeFile();
     };
-
-    // Papa.parse(file, {
-    //     header: true,
-    //     complete: ({ data }) => {
-    //       setCsvData(data);
-    //     },
-    //   });
-    // };
 
     const handleRemove = (tag) => {
         setSelectedTags(selectedTags.filter((t) => t !== tag));
@@ -101,7 +95,6 @@ const ExcelUpload = () => {
 
     return (
         <>
-        {/* <div className='z-40'> */}
             <div className="flex flex-col items-center justify-center gap-5 overflow-clip">
                 <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''} cursor-grab`}>
                     <input {...getInputProps()} />
@@ -136,9 +129,9 @@ const ExcelUpload = () => {
                     </button>
                 }
             </div>
-            <h1 className='font-figtree text-2xl mt-10 md:ml-20 ml-10'>Uploads</h1>
-            <div className="flex md:11/12 md:mx-10 mx-5 flex-col overflow-scroll bg-[#F2F2F2] rounded-3xl mt-10 p-3 md:max-w-full max-w-sm ">
-                <table className="md:min-w-screen divide-y bg-[#F2F2F2] divide-gray-200 rounded-2xl ">
+            <h1 className='font-figtree text-2xl mt-10 md:ml-44 ml-10 font-bold'>Uploads</h1>
+            <div className="flex md:11/12 md:mx-10 mx-5 md:ml-44 flex-col overflow-scroll bg-[#F2F2F2] rounded-3xl mt-10 p-3 md:max-w-full xs:max-w-screen-xl max-w-sm ">
+                <table className="md:min-w-screen divide-y bg-[#F2F2F2] divide-[#F2F2F2]">
                     <thead className="bg-gray-70">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Sl No.</th>
@@ -148,12 +141,13 @@ const ExcelUpload = () => {
                             <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Selected Tags</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y-[16px] divide-[#F2F2F2] rounded-2xl">
+                    <tbody className="bg-white divide-y-[16px] divide-[#F2F2F2] ">
                         {csvData?.slice(1).map((row, index) => (
-                            <tr key={index} className='rounded-3xl'>
+                            <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">{row[0]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <a href={row[1]} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a>
+                                    <a href={`http://${row[1]}`} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a>
+                                    {/* <a href={row[1]} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a> */}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">{row[2]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -178,7 +172,6 @@ const ExcelUpload = () => {
                     </tbody>
                 </table>
             </div>
-        {/* // </div> */}
         </>
     );
 };

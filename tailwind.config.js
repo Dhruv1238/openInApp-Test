@@ -12,6 +12,9 @@ export default {
         nunito: ["Nunito", "sans-serif"],
         figtree: ["Figtree", "sans-serif"],
       },
+      screens: {
+        'xs': '500px',
+      },
     },
   },
   plugins: [],
