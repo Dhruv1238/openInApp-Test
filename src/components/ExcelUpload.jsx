@@ -13,7 +13,7 @@ const ExcelUpload = () => {
     const [csvData, setCsvData] = useState(null);
     const [excelData, setExcelData] = useState(null);
     const [file, setFile] = useState(null);
-    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState({});
 
     const acceptedFileTypes = '.xlsx, .xls, .csv';
 
@@ -60,12 +60,16 @@ const ExcelUpload = () => {
         setSelectedTags(selectedTags.filter((t) => t !== tag));
     };
 
-    const TagDropdown = ({ tags }) => {
+    const TagDropdown = ({ tags, rowIndex }) => {
         const [isOpen, setIsOpen] = useState(false);
 
         const handleSelect = (tag) => {
-            setSelectedTags([...selectedTags, tag]);
-            console.log(selectedTags);
+            const currentTags = selectedTags[rowIndex] || [];
+            setSelectedTags({
+                ...selectedTags,
+                [rowIndex]: [...currentTags, tag]
+            });
+            console.log(selectedTagsMap);
         };
 
         return (
@@ -151,10 +155,10 @@ const ExcelUpload = () => {
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">{row[2]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <TagDropdown tags={row[3]} />
+                                    <TagDropdown tags={row[3]} rowIndex={index} />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap flex flex-row">
-                                    {selectedTags.map((tag, index) => (
+                                    {selectedTags[index]?.map((tag, index) => (
                                         <div key={index} className="flex font-figtree h-7 text-white rounded-md flex-row items-center bg-baseBlue m-1">
                                             <span onClick={() => handleRemove(tag)} className="px-2 text-sm leading-5 font-semibold">
                                                 {tag}
