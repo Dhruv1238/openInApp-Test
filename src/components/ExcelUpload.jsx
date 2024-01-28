@@ -6,10 +6,12 @@ import excelMob from '../assets/upload/excelDropMob.svg';
 import uploadIcon from '../assets/upload/uploadIcon.svg';
 import tagCross from '../assets/upload/tagCross.svg';
 import Papa from 'papaparse';
+import { parseExcelFile } from './ExcelToCsv';
 
 const ExcelUpload = () => {
     const [fileName, setFileName] = useState(null);
     const [csvData, setCsvData] = useState(null);
+    const [file, setFile] = useState(null);
     const [selectedTags, setSelectedTags] = useState([]);
 
     const acceptedFileTypes = '.xlsx, .xls, .csv';
@@ -19,15 +21,25 @@ const ExcelUpload = () => {
         multiple: false,
         onDrop: acceptedFiles => {
             setFileName(acceptedFiles[0].name);
+            if (acceptedFiles[0].name.endsWith('.csv')) {
+                setFile(acceptedFiles[0]);
+            }else{
+                parseExcelFile(acceptedFiles[0]).then((data) => {
+                    console.log(data);
+                    setCsvData(data);
+                });
+            }
         }
     });
+
+    console.log(acceptedFiles);
 
     const removeFile = () => {
         setFileName(null);
     }
 
     const parseCSV = () => {
-        Papa.parse(acceptedFiles[0], {
+        Papa.parse(file, {
             complete: function (results) {
                 console.log(results.data);
                 setCsvData(results.data);
@@ -58,7 +70,7 @@ const ExcelUpload = () => {
         return (
             <div className="relative inline-block text-left">
                 <div>
-                    <button type="button" onClick={() => setIsOpen(!isOpen)} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true">
+                    <button type="button" onClick={() => setIsOpen(!isOpen)} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="true">
                         Select Tags
                         <svg className="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -82,7 +94,7 @@ const ExcelUpload = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center gap-5 overflow-auto">
+            <div className="flex flex-col items-center justify-center gap-5 overflow-clip">
                 <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''} cursor-grab`}>
                     <input {...getInputProps()} />
                     {fileName ? (
@@ -110,14 +122,14 @@ const ExcelUpload = () => {
                         Upload
                     </button>
                     :
-                    <button className=' max-w-xs md:max-w-xl  bg-indigo-400 cursor-not-allowed text-white rounded-md px-4 py-2 mt-10 w-full flex items-center justify-center font-figtree gap-3 h-14'>
+                    <button className=' max-w-xs md:max-w-xl  bg-indigo-300 cursor-not-allowed text-white rounded-md px-4 py-2 mt-10 w-full flex items-center justify-center font-figtree gap-3 h-14'>
                         <img src={uploadIcon} alt="Upload Icon" />
                         Upload
                     </button>
                 }
             </div>
-            <h1 className='font-figtree text-2xl mt-10 ml-10 md:ml-96'>Uploads</h1>
-            <div className="flex md:w-screen mx-10 md:h-[40vh] flex-col md:ml-80 overflow-scroll p-10 md:max-w-full max-w-sm h-[30vh]">
+            <h1 className='font-figtree text-2xl mt-10 md:ml-20 ml-10'>Uploads</h1>
+            <div className="flex md:w-screen mx-10 h- flex-col overflow-scroll pr-16 p-10 md:max-w-full max-w-sm ">
                 <table className="md:min-w-screen divide-y divide-gray-200 ">
                     <thead className="bg-gray-50">
                         <tr>

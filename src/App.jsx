@@ -5,9 +5,10 @@ import { Router } from './Router'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+
   )
 }
 
