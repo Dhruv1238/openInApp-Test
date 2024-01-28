@@ -56,8 +56,11 @@ const ExcelUpload = () => {
         removeFile();
     };
 
-    const handleRemove = (tag) => {
-        setSelectedTags(selectedTags.filter((t) => t !== tag));
+    const handleRemove = (tag, rowIndex) => {
+        setSelectedTags({
+            ...selectedTags,
+            [rowIndex]: selectedTags[rowIndex].filter((t) => t !== tag)
+        });
     };
 
     const TagDropdown = ({ tags, rowIndex }) => {
@@ -65,11 +68,13 @@ const ExcelUpload = () => {
 
         const handleSelect = (tag) => {
             const currentTags = selectedTags[rowIndex] || [];
-            setSelectedTags({
-                ...selectedTags,
-                [rowIndex]: [...currentTags, tag]
-            });
-            console.log(selectedTagsMap);
+            if (!currentTags.includes(tag)) {
+                setSelectedTags({
+                    ...selectedTags,
+                    [rowIndex]: [...currentTags, tag]
+                });
+            }
+            console.log(selectedTags);
         };
 
         return (
@@ -158,12 +163,12 @@ const ExcelUpload = () => {
                                     <TagDropdown tags={row[3]} rowIndex={index} />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap flex flex-row">
-                                    {selectedTags[index]?.map((tag, index) => (
-                                        <div key={index} className="flex font-figtree h-7 text-white rounded-md flex-row items-center bg-baseBlue m-1">
-                                            <span onClick={() => handleRemove(tag)} className="px-2 text-sm leading-5 font-semibold">
+                                    {selectedTags[index]?.map((tag, tagIndex) => (
+                                        <div key={tagIndex} className="flex font-figtree h-7 text-white rounded-md flex-row items-center bg-baseBlue m-1">
+                                            <span onClick={() => handleRemove(tag, index)} className="px-2 text-sm leading-5 font-semibold">
                                                 {tag}
                                             </span>
-                                            <button onClick={() => handleRemove(tag)} >
+                                            <button onClick={() => handleRemove(tag, index)} >
                                                 {/* <span className=" text-red-600 text-xs">Rm</span> */}
                                                 <img src={tagCross} alt="Tag Cross" className='h-5' />
                                             </button>

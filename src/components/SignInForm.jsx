@@ -49,7 +49,7 @@ export const SinginForm = () => {
                     <div className='text-left font-lato text-md text-black'>
                         Email address
                     </div>
-                    <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} className='h-10 p-3 rounded-xl focus:bg-indigo-100 focus:border-none' />
+                    <input type="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} className='h-10 p-3 rounded-xl focus:bg-indigo-100 focus:border-none' />
                     <div className='text-left font-lato text-md text-black'>
                         Password
                     </div>

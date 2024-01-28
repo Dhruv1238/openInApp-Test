@@ -39,7 +39,9 @@ export const SignIn = () => {
                     <img src={base} alt="base" className='fixed left-0 z-0 overflow-hidden' />
                     <h1 className="text-6xl text-center font-bold text-white z-50 mb-10">BASE</h1>
                     <div className='flex gap-5 mb-10 mr-20'>
-                        <img src={github} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
+                        <a href="https://github.com/Dhruv1238" target="_blank" rel="noopener noreferrer" className='z-50'>
+                            <img src={github} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
+                        </a>
                         <img src={twitter} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
                         <img src={linkedin} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
                         <img src={discord} alt="socials" className='z-50 h-10 w-10 cursor-pointer' />
