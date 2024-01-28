@@ -9,7 +9,7 @@ export const Upload = () => {
                 {/* <div className="absolute z-40 top-0 left-0 overflow-hidden"> */}
                 <Drawer />
                 {/* </div> */}
-                <div className="z-40 absolute mt-28 overflow-x-clip right-0 left-24">
+                <div className="z-40 absolute mt-28 overflow-x-clip right-0 left-0 md:left-24">
                     {/* <h1 >Upload</h1> */}
                     <ExcelUpload />
                 </div>

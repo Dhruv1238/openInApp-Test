@@ -137,20 +137,20 @@ const ExcelUpload = () => {
                 }
             </div>
             <h1 className='font-figtree text-2xl mt-10 md:ml-20 ml-10'>Uploads</h1>
-            <div className="flex md:w-screen mx-10 h- flex-col overflow-scroll pr-16 p-10 md:max-w-full max-w-sm ">
-                <table className="md:min-w-screen divide-y divide-gray-200 ">
-                    <thead className="bg-gray-50">
+            <div className="flex md:11/12 md:mx-10 mx-5 flex-col overflow-scroll bg-[#F2F2F2] rounded-3xl mt-10 p-3 md:max-w-full max-w-sm ">
+                <table className="md:min-w-screen divide-y bg-[#F2F2F2] divide-gray-200 rounded-2xl ">
+                    <thead className="bg-gray-70">
                         <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Links</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prefix</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Select Tags</th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Selected Tags</th>
+                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Sl No.</th>
+                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Links</th>
+                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Prefix</th>
+                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Add Tags</th>
+                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Selected Tags</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                        {csvData?.map((row, index) => (
-                            <tr key={index}>
+                    <tbody className="bg-white divide-y-[16px] divide-[#F2F2F2] rounded-2xl">
+                        {csvData?.slice(1).map((row, index) => (
+                            <tr key={index} className='rounded-3xl'>
                                 <td className="px-6 py-4 whitespace-nowrap">{row[0]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <a href={row[1]} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a>
