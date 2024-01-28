@@ -11,6 +11,7 @@ import { parseExcelFile } from './ExcelToCsv';
 const ExcelUpload = () => {
     const [fileName, setFileName] = useState(null);
     const [csvData, setCsvData] = useState(null);
+    const [excelData, setExcelData] = useState(null);
     const [file, setFile] = useState(null);
     const [selectedTags, setSelectedTags] = useState([]);
 
@@ -23,10 +24,10 @@ const ExcelUpload = () => {
             setFileName(acceptedFiles[0].name);
             if (acceptedFiles[0].name.endsWith('.csv')) {
                 setFile(acceptedFiles[0]);
-            }else{
+            } else {
                 parseExcelFile(acceptedFiles[0]).then((data) => {
                     console.log(data);
-                    setCsvData(data);
+                    setExcelData(data);
                 });
             }
         }
@@ -39,14 +40,20 @@ const ExcelUpload = () => {
     }
 
     const parseCSV = () => {
-        Papa.parse(file, {
-            complete: function (results) {
-                console.log(results.data);
-                setCsvData(results.data);
-            }
-        });
+        if (excelData === null) {
+            Papa.parse(file, {
+                complete: function (results) {
+                    console.log(results.data);
+                    setCsvData(results.data);
+                }
+            });
+        }
+        else {
+            setCsvData(excelData);
+        }
         removeFile();
-    }
+    };
+
     // Papa.parse(file, {
     //     header: true,
     //     complete: ({ data }) => {
@@ -94,6 +101,7 @@ const ExcelUpload = () => {
 
     return (
         <>
+        {/* <div className='z-40'> */}
             <div className="flex flex-col items-center justify-center gap-5 overflow-clip">
                 <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''} cursor-grab`}>
                     <input {...getInputProps()} />
@@ -141,7 +149,7 @@ const ExcelUpload = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {csvData?.slice(1).map((row, index) => (
+                        {csvData?.map((row, index) => (
                             <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">{row[0]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -170,6 +178,7 @@ const ExcelUpload = () => {
                     </tbody>
                 </table>
             </div>
+        {/* // </div> */}
         </>
     );
 };

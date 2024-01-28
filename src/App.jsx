@@ -5,10 +5,13 @@ import { Router } from './Router'
 
 function App() {
   return (
+    <>
+    <div className=' overflow-x-clip'>
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-
+    </div>
+    </>
   )
 }
 

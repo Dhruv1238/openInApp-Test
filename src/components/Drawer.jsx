@@ -24,7 +24,7 @@ export const Drawer = () => {
 
     useEffect(() => {
         setBright(isOpen === 'translate-x-0' ? 'backdrop-brightness-50' : 'backdrop-brightness-100');
-        setIndex(isOpen === 'translate-x-0' ? 'z-50' : 'z-10');
+        setIndex(isOpen === 'translate-x-0' ? 'z-[9999]' : 'z-10');
         console.log(index);
         console.log(bright);
     }, [isOpen]);
