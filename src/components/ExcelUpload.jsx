@@ -138,49 +138,53 @@ const ExcelUpload = () => {
                     </button>
                 }
             </div>
-            <h1 className='font-figtree text-2xl mt-10 md:ml-44 ml-10 font-bold'>Uploads</h1>
-            <div className="flex md:11/12 md:mx-10 mx-5 md:ml-44 flex-col overflow-scroll bg-[#F2F2F2] rounded-3xl mt-10 p-3 md:max-w-full xs:max-w-screen-xl max-w-sm ">
-                <table className="md:min-w-screen divide-y bg-[#F2F2F2] divide-[#F2F2F2]">
-                    <thead className="bg-gray-70">
-                        <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Sl No.</th>
-                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Links</th>
-                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Prefix</th>
-                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Add Tags</th>
-                            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Selected Tags</th>
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y-[16px] divide-[#F2F2F2] ">
-                        {csvData?.slice(1).map((row, index) => (
-                            <tr key={index}>
-                                <td className="px-6 py-4 whitespace-nowrap">{row[0]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <a href={`http://${row[1]}`} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a>
-                                    {/* <a href={row[1]} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a> */}
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">{row[2]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <TagDropdown tags={row[3]} rowIndex={index} />
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap flex flex-row">
-                                    {selectedTags[index]?.map((tag, tagIndex) => (
-                                        <div key={tagIndex} className="flex font-figtree h-7 text-white rounded-md flex-row items-center bg-baseBlue m-1">
-                                            <span onClick={() => handleRemove(tag, index)} className="px-2 text-sm leading-5 font-semibold">
-                                                {tag}
-                                            </span>
-                                            <button onClick={() => handleRemove(tag, index)} >
-                                                {/* <span className=" text-red-600 text-xs">Rm</span> */}
-                                                <img src={tagCross} alt="Tag Cross" className='h-5' />
-                                            </button>
-                                        </div>
-                                    ))
-                                    }
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            {csvData && (
+                <>
+                    <h1 className='font-figtree text-2xl mt-10 md:ml-44 ml-10 font-bold'>Uploads</h1>
+                    <div className="flex md:11/12 md:mx-10 mx-5 md:ml-44 flex-col overflow-scroll bg-[#F2F2F2] rounded-3xl mt-10 p-3 md:max-w-full xs:max-w-screen-xl max-w-sm ">
+                        <table className="md:min-w-screen divide-y bg-[#F2F2F2] divide-[#F2F2F2]">
+                            <thead className="bg-gray-70">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Sl No.</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Links</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Prefix</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Add Tags</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-bold font-figtree tracking-wider">Selected Tags</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y-[16px] divide-[#F2F2F2]">
+                                {csvData?.slice(1).map((row, index) => (
+                                    <tr key={index}>
+                                        <td className="px-6 py-4 whitespace-nowrap">{row[0]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <a href={`http://${row[1]}`} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a>
+                                            {/* <a href={row[1]} target="_blank" rel="noreferrer" className="text-indigo-600 hover:text-indigo-900">{row[1]}</a> */}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{row[2]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <TagDropdown tags={row[3]} rowIndex={index} />
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap flex flex-row">
+                                            {selectedTags[index]?.map((tag, tagIndex) => (
+                                                <div key={tagIndex} className="flex font-figtree h-7 text-white rounded-md flex-row items-center bg-baseBlue m-1">
+                                                    <span onClick={() => handleRemove(tag, index)} className="px-2 text-sm leading-5 font-semibold">
+                                                        {tag}
+                                                    </span>
+                                                    <button onClick={() => handleRemove(tag, index)} >
+                                                        {/* <span className=" text-red-600 text-xs">Rm</span> */}
+                                                        <img src={tagCross} alt="Tag Cross" className='h-5' />
+                                                    </button>
+                                                </div>
+                                            ))
+                                            }
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </>
+            )}
         </>
     );
 };
